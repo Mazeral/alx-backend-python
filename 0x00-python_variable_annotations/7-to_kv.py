@@ -7,10 +7,10 @@ This module provides a function for converting a key-value
 pair into a tuple, where the value is squared.
 """
 
-from typing import Union
+from typing import Union, Tuple
 
 
-def to_kv(k: str, v: Union[int, float]) -> tuple[str, Union[int, float]]:
+def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     """
     Returns a tuple containing the key and the squared value.
 
@@ -20,7 +20,7 @@ def to_kv(k: str, v: Union[int, float]) -> tuple[str, Union[int, float]]:
         which can be an integer or a float.
 
     Returns:
-        tuple[str, Union[int, float]]: A tuple containing the key
+        Tuple[str, float]: A tuple containing the key
         and the squared value.
 
     Examples:
