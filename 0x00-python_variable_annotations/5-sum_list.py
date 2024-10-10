@@ -3,21 +3,21 @@
 """
 Module for list operations.
 
-This module provides a function for calculating the sum of a list of integers.
+This module provides a function for calculating the sum of a list of floats.
 """
 
 from typing import List
 
 
-def sum_list(input_list: List[int]) -> float:
+def sum_list(input_list: List[float]) -> float:
     """
-    Returns the sum of a list of integers as a floating point number.
+    Returns the sum of a list of floats as a floating point number.
 
     Args:
-        input_list (List[int]): A list of integers to calculate the sum of.
+        input_list (List[int]): A list of floats to calculate the sum of.
 
     Returns:
-        float: The sum of the integers in the input list.
+        float: The sum of the floats in the input list.
 
     Examples:
         >>> sum_list([1, 2, 3, 4, 5])
