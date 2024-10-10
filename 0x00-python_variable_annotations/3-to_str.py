@@ -3,16 +3,16 @@
 """
 Module for type conversions.
 
-This module provides a simple function for converting integers to strings.
+This module provides a simple function for converting floats to strings.
 """
 
 
-def to_str(n: int) -> str:
+def to_str(n: float) -> str:
     """
-    Returns the string representation of an integer.
+    Returns the string representation of an float.
 
     Args:
-        n (int): The integer to convert to a string.
+        n (float): The float to convert to a string.
 
     Returns:
         str: The string representation of n.
