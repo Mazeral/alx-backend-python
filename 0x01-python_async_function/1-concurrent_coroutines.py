@@ -21,14 +21,16 @@ async def wait_n(n: int, max_delay: int) -> list[float]:
         max_delay (int): The maximum delay in seconds.
 
     Returns:
-        list[float]: A list of the actual delay times in seconds, sorted in ascending order.
+        list[float]: A list of the actual delay times in seconds,
+        sorted in ascending order.
     """
     # Generate a list of n random wait times using asyncio.gather
-    # The * is used to unpack the list, so asyncio.gather treats each item as a separate task
+    # The * is used to unpack the list, so asyncio.gather treats each
+    # item as a separate task
     randoms = await asyncio.gather(*[wait_random(max_delay) for _ in range(n)])
-    
+
     # Sort the list of random wait times in ascending order
     randoms.sort()
-    
+
     # Return the sorted list of random wait times
     return randoms
