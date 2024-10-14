@@ -20,6 +20,6 @@ def task_wait_random(max_delay: int) -> asyncio.Task:
         asyncio.Task: A task that waits for a random time period.
     """
     # Create a task that waits for a random time period using asyncio.Task
-    # Note: asyncio.Task is deprecated since Python 3.7, use asyncio.create_task
-    # instead
+    # Note: asyncio.Task is deprecated since Python 3.7,
+    # use asyncio.create_task instead
     return asyncio.create_task(wait_random(max_delay))
