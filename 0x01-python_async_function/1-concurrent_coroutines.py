@@ -7,6 +7,7 @@ Module for asynchronous random delay functionality.
 import asyncio
 import importlib
 import random
+from typing import List
 
 # Import the wait_random function from the 0-basic_async_syntax module
 wait_random = __import__('0-basic_async_syntax').wait_random
