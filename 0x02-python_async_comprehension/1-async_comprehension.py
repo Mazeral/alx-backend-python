@@ -9,7 +9,6 @@ which generates a list of random numbers using an asynchronous generator.
 
 import asyncio
 import random
-from typing import List
 async_generator = __import__("0-async_generator").async_generator
 
 
@@ -24,4 +23,4 @@ async def async_comprehension() -> list[float]:
     Returns:
         list[float]: A list of random numbers.
     """
-    return [x async for x in async_generator()]
+    return [_ async for _ in async_generator()]
