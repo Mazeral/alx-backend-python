@@ -12,7 +12,7 @@ import random
 import asyncio
 
 
-async def async_generator() -> asyncio.AsyncGenerator[float, None]:
+async def async_generator():
     """
     An asynchronous generator function that yields a sequence
     of random numbers.
