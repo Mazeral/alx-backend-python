@@ -8,11 +8,11 @@ which generates a sequence
 of random numbers asynchronously.
 """
 
-import random
+from typing import AsyncGenerator
 import asyncio
+import random
 
-
-async def async_generator():
+async def async_generator() -> AsyncGenerator[float, None]:
     """
     An asynchronous generator function that yields a sequence
     of random numbers.
