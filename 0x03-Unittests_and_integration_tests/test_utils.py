@@ -6,9 +6,9 @@ This module contains unit tests for the access_nested_map function,
 verifying its ability to retrieve values from nested maps.
 """
 
-import unittest
-import utils
+import unittest, utils
 from parameterized import parameterized
+from unittest.mock import Mock, patch
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -63,3 +63,24 @@ class TestAccessNestedMap(unittest.TestCase):
             # Attempt to access the nested map with the given path,
             # expecting a KeyError
             utils.access_nested_map(nested_map, path)
+
+
+class TestGetJson(unittest.TestCase):
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+                          ])
+    @patch('requests.get') # to make sure that no get requests are actually made
+    def test_get_json(self, test_url, test_payload, mock_get):
+        # Configure the Mock
+        mock_response = Mock()
+        mock_response.json.return_value = test_payload
+        # We got this from the @patch('requests.get')
+        mock_get.return_value = mock_response
+
+        # Call the function being tested
+        result = utils.get_json(test_url)
+
+        # Assertions
+        mock_get.assert_called_once_with(test_url)
+        self.assertEqual(result, test_payload)
