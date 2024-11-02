@@ -40,3 +40,26 @@ class TestAccessNestedMap(unittest.TestCase):
         """
         self.assertEqual(utils.access_nested_map(nested_map, path),
                          expected_result)
+
+    # When expecting an error, we don't pass expected results
+    @parameterized.expand([
+        ({}, {"a",}, ),  # Empty map with non-existent key
+        ({"a": 1}, {"a", "b"}, )  # Map with single key,
+        # attempting to access non-existent nested key
+    ])
+    def test_access_nested_map_exception(self, nested_map: dict,
+                                         path: set) -> None:
+        """
+        Tests that utils.access_nested_map raises a KeyError for invalid paths.
+
+        Args:
+            nested_map (dict): The input nested map.
+            path (set): The key path that is expected to raise a KeyError.
+
+        Returns:
+            None
+        """
+        with self.assertRaises(KeyError):
+            # Attempt to access the nested map with the given path,
+            # expecting a KeyError
+            utils.access_nested_map(nested_map, path)
