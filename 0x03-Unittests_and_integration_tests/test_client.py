@@ -13,6 +13,7 @@ import unittest.mock
 from unittest.mock import patch, Mock
 import requests
 
+
 class TestGithubOrgClient(unittest.TestCase):
     """
     Test case for the GithubOrgClient class.
@@ -26,7 +27,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ('google'),  # Test with Google's Github organization
         ('abc')      # Test with a sample Github organization (abc)
     ])
-    @patch('client.get_json')
+    @patch('client.get_json') # ALWAYS MAKE SURE THAT IT'S AFTER PARAMETERIZED
     def test_org(self, org_name, mock_get_json):
         """
         Tests the org property of GithubOrgClient.
@@ -40,9 +41,9 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         # Create a GithubOrgClient instance for the given organization
         test_inst = GithubOrgClient(org_name)
-        
+
         # Call the org method to trigger the get_json call
         test_inst.org()
-        
+
         # Verify that get_json is called once with the expected URL
         mock_get_json.called_once_with(test_inst.ORG_URL.format(org=org_name))
