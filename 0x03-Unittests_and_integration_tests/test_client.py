@@ -27,7 +27,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ('google'),  # Test with Google's Github organization
         ('abc')      # Test with a sample Github organization (abc)
     ])
-    @patch('client.get_json') # ALWAYS MAKE SURE THAT IT'S AFTER PARAMETERIZED
+    @patch('client.get_json')
     def test_org(self, org_name, mock_get_json):
         """
         Tests the org property of GithubOrgClient.
@@ -39,6 +39,7 @@ class TestGithubOrgClient(unittest.TestCase):
             org_name (str): The name of the Github organization to test.
             mock_get_json (Mock): The mocked get_json object.
         """
+        # ALWAYS MAKE SURE THAT PATCH IS AFTER PARAMETERIZED
         # Create a GithubOrgClient instance for the given organization
         test_inst = GithubOrgClient(org_name)
 
