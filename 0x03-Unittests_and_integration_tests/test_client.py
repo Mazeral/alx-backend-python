@@ -83,7 +83,7 @@ class TestGithubOrgClient(unittest.TestCase):
             # to a custom URL.
 
             # Create a GithubOrgClient instance for the given organization
-            test_insta = client.GithubOrgClient('test-org')
+            test_insta = client.GithubOrgClient('test')
             # Initialize a GithubOrgClient instance for testing with the
             # 'test-org' organization.
 
