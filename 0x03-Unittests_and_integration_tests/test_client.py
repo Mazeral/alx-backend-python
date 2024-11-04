@@ -109,9 +109,6 @@ class TestGithubOrgClient(unittest.TestCase):
             """
             Extract the repository names from the mock payloads for comparison.
             """
-            print(expected_result)
-            print(actual_result)
-
             # Assertions
             self.assertEqual(expected_result, actual_result)
             """
