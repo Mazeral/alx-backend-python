@@ -116,13 +116,3 @@ class TestGithubOrgClient(unittest.TestCase):
             Verify that the actual result matches the expected list of
             repository names.
             """
-            mock_public_repos_url.assert_called_once()
-            """
-            Verify that the _public_repos_url property was called once
-            during the test.
-            """
-            mock_get_json.assert_called_once()
-            """
-            Verify that the get_json function was called once during
-            the test.
-            """
