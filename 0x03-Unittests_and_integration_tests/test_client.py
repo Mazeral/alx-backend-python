@@ -113,10 +113,25 @@ class TestGithubOrgClient(unittest.TestCase):
             # the test.
 
     @parameterized.expand([
-    ({"license": {"key": "my_license"}}, "my_license"),
-    ({"license": {"key": "other_license"}}, "my_license")
+        # Test case with matching license key
+        ({"license": {"key": "my_license"}}, "my_license"),
+        # Test case with non-matching license key
+        ({"license": {"key": "other_license"}}, "my_license")
     ])
     def test_has_license(self, repo, license_key):
+        """
+        Test the has_license method of GithubOrgClient.
+
+        Args:
+            repo (dict): A dictionary representing a repository.
+            license_key (str): The license key to check for.
+
+        Returns:
+            None
+        """
+        # Calculate the expected result
         expected_value = repo['license']['key'] == license_key
+        # Get the actual result from the has_license method
         actual_value = GithubOrgClient.has_license(repo, license_key)
+        # Assert that the expected and actual results are equal
         self.assertEqual(expected_value, actual_value)
