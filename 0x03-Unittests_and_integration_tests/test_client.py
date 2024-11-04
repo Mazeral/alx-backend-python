@@ -50,44 +50,28 @@ class TestGithubOrgClient(unittest.TestCase):
         # Verify that get_json is called once with the expected URL
         mock_get_json.called_once_with(test_inst.ORG_URL.format(org=org_name))
 
-    @parameterized.expand([
-        ('google'),  # Test with Google's Github organization
-        ('abc')      # Test with a sample Github organization (abc)
-    ])
-    def test_public_repos_url(self, org_name):
-        """
-        Tests the `_public_repos_url` property of `GithubOrgClient`.
-
-        Verifies that the property returns the expected URL for the given
-        organization.
-
-        Args:
-            org_name (str): The name of the Github organization to test.
-        """
+    @patch('client.get_json')
+    def test_public_repos_url(self, mock_get_json):
+        # Mocking get_json and giving it a payload of choice
+        payloads = [
+            {"id": 1, "name": "repo1", "license": {"key": "MIT"}},
+            {"id": 2, "name": "repo2", "license": {"key": "Apache-2.0"}},
+            {"id": 3, "name": "repo3", "license": {"key": "MIT"}},
+            {"id": 4, "name": "repo4", "license": {"key": "GPL-3.0"}},
+        ]
+        mock_get_json.return_value = payloads
         with patch('client.GithubOrgClient._public_repos_url',
                    new_callable=PropertyMock) as mock_public_repos_url:
-            """
-            Mock the `_public_repos_url` property to control its return value.
+            # mocking public_repos_url attribute and giving it a value of choice
+            mock_public_repos_url.return_value = "https://api.github.com/repos"
 
-            :param mock_public_repos_url: The mocked property object.
-            """
             # Create a GithubOrgClient instance for the given organization
-            test_insta = client.GithubOrgClient(org_name)
+            test_insta = client.GithubOrgClient('test-org')
 
-            # Define the expected URL based on the organization name
-            expected_url = f'https://api.github.com/orgs/{org_name}/repos'
-            """
-            In testing, we define the result which we want, and compare it
-            To the test we actually get from the functions, methods and other
-            Things to know if they are actually working as intended
+            actual_result = test_insta.public_repos()
 
-            In the case of mocks:
-            Mocks being the values we create and make it (how it should work)
-            The original methods, functions and test it (how it actually works)
-            """
+            expected_result = [payload["name"] for payload in payloads]
+            self.assertEqual(expected_result, actual_result)
 
-            # Set the return value of the mocked property
-            mock_public_repos_url.return_value = expected_url
-
-            # Assert that the property returns the expected URL
-            self.assertEqual(test_insta._public_repos_url, expected_url)
+            mock_public_repos_url.assert_called_once()
+            mock_get_json.assert_called_once()
