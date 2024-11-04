@@ -76,6 +76,15 @@ class TestGithubOrgClient(unittest.TestCase):
 
             # Define the expected URL based on the organization name
             expected_url = f'https://api.github.com/orgs/{org_name}/repos'
+            """
+            In testing, we define the result which we want, and compare it
+            To the test we actually get from the functions, methods and other
+            Things to know if they are actually working as intended
+
+            In the case of mocks:
+            Mocks being the values we create and make it (how it should work)
+            The original methods, functions and test it (how it actually works)
+            """
 
             # Set the return value of the mocked property
             mock_public_repos_url.return_value = expected_url
