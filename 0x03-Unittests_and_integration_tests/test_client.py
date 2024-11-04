@@ -94,7 +94,8 @@ class TestGithubOrgClient(unittest.TestCase):
 
             # Define the expected result based on the mock payloads
             expected_result = [payload["name"] for payload in payloads]
-            # Extract the repository names from the mock payloads for comparison.
+            # Extract the repository names from the mock payloads for
+            # comparison.
 
             # Assertions
             self.assertEqual(expected_result, actual_result)
