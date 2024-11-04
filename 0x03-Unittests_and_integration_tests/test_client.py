@@ -69,59 +69,44 @@ class TestGithubOrgClient(unittest.TestCase):
             {"id": 3, "name": "repo3", "license": {"key": "MIT"}},
             {"id": 4, "name": "repo4", "license": {"key": "GPL-3.0"}},
         ]
-        """
-        Sample repository payloads with id, name, and license information.
-        """
+        # Sample repository payloads with id, name, and license information.
         mock_get_json.return_value = payloads
-        """
-        Set the return value of the mocked get_json function to the sample
-        payloads.
-        """
+        # Set the return value of the mocked get_json function to the sample
+        # payloads.
 
         # Mocking the _public_repos_url property with a custom URL
         with patch('client.GithubOrgClient._public_repos_url',
                    new_callable=PropertyMock) as mock_public_repos_url:
-            """
-            Mock the _public_repos_url property to control its return value.
-            """
+            # Mock the _public_repos_url property to control its return value.
             mock_public_repos_url.return_value = "https://api.github.com/repos"
-            """
-            Set the return value of the mocked _public_repos_url property
-            to a custom URL.
-            """
+            # Set the return value of the mocked _public_repos_url property
+            # to a custom URL.
 
             # Create a GithubOrgClient instance for the given organization
             test_insta = client.GithubOrgClient('test-org')
-            """
-            Initialize a GithubOrgClient instance for testing with the
-            'test-org' organization.
-            """
+            # Initialize a GithubOrgClient instance for testing with the
+            # 'test-org' organization.
 
             # Call the public_repos method and store the result
             actual_result = test_insta.public_repos()
-            """
-            Retrieve the list of public repository names for the test
-            organization.
-            """
+            # Retrieve the list of public repository names for the test
+            # organization.
 
             # Define the expected result based on the mock payloads
             expected_result = [payload["name"] for payload in payloads]
-            """
-            Extract the repository names from the mock payloads for comparison.
-            """
+            # Extract the repository names from the mock payloads for comparison.
+
             # Assertions
             self.assertEqual(expected_result, actual_result)
-            """
-            Verify that the actual result matches the expected list of
-            repository names.
-            """
+            # Verify that the actual result matches the expected list of
+            # repository names.
+
             mock_public_repos_url.called_with_once()
-            """
-            Verify that the _public_repos_url property was called once
-            during the test.
-            """
+
+            # Verify that the _public_repos_url property was called once
+            # during the test.
+
             mock_get_json.called_with_once()
-            """
-            Verify that the get_json function was called once during
-            the test.
-            """
+
+            # Verify that the get_json function was called once during
+            # the test.
