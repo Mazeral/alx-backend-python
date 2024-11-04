@@ -111,3 +111,12 @@ class TestGithubOrgClient(unittest.TestCase):
 
             # Verify that the get_json function was called once during
             # the test.
+
+    @parameterized.expand([
+    ({"license": {"key": "my_license"}}, "my_license"),
+    ({"license": {"key": "other_license"}}, "my_license")
+    ])
+    def test_has_license(self, repo, license_key):
+        expected_value = repo['license']['key'] == license_key
+        actual_value = GithubOrgClient.has_license(repo, license_key)
+        self.assertEqual(expected_value, actual_value)
