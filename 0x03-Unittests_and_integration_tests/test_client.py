@@ -139,25 +139,33 @@ class TestGithubOrgClient(unittest.TestCase):
 
 
 """
-When you assign the dictionary to mock_get.return_value, you're essentially creating a shared state across all test class instances. This means that:
+        When you assign the dictionary to mock_get.return_value,
+        you're essentially creating a shared state across all test
+        class instances. This means that:
 
-    Every time requests.get() is called, it will return the same dictionary, which contains all the fixtures.
-    The dictionary is not magically updated to reflect the specific instance attributes (self.org_payload, etc.) of each test class instance.
+        Every time requests.get() is called, it will return the same
+        dictionary, which contains all the fixtures.
+        The dictionary is not magically updated to reflect the specific
+        instance attributes (self.org_payload, etc.) of each test class
+        instance.
 """
 # WONT WORK!!!
 # mock_get.return_value = {"org_payload": self.org_payload,
-                         # "repos_payload": self.repos_payload,
-                         # "expected_repos": self.expected_repos,
-                         # "apache2_repos": self.apache2_repos}
+# "repos_payload": self.repos_payload,
+# "expected_repos": self.expected_repos,
+# "apache2_repos": self.apache2_repos}
 # starting the patcher of requests.get
-@parameterized_class(["org_payload", "repos_payload", "expected_repos", "apache2_repos"], TEST_PAYLOAD)
+
+
+@parameterized_class(["org_payload", "repos_payload",
+                      "expected_repos", "apache2_repos"], TEST_PAYLOAD)
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     def setUpClass(self):
         get_patcher = patch('requests.get')
+
         def get_payload_for_url(url):
+            get_patcher.start()
+            get_patcher.side_effect = []
 
-
-        get_patcher.start()
-        get_patcher.side_effect = []
     def tearDownClass(self, patcher):
         patcher.stop()
